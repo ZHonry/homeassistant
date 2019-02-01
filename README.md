@@ -1,0 +1,1 @@
+在homeassistant官方镜像中增加ipmitool和snmp工具
