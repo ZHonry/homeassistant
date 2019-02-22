@@ -1,4 +1,4 @@
-FROM homeassistant/home-assistant:0.88.1
+FROM homeassistant/home-assistant:0.88.0
 
 RUN apt-get update \
  && apt-get -y install ipmitool snmp snmpd python3-dev libssl-dev libffi-dev mjpegtools \
