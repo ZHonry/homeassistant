@@ -1,4 +1,4 @@
-FROM homeassistant/intel-nuc-homeassistant:0.88.0
+FROM homeassistant/intel-nuc-homeassistant:0.88.1
 
 RUN apt-get update \
  && apt-get -y install ipmitool snmp snmpd python3-dev libssl-dev libffi-dev mjpegtools \
