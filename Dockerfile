@@ -1,7 +1,4 @@
-FROM homeassistant/home-assistant:0.89.1
+FROM homeassistant/qemux86-64-homeassistant:0.89.1
 
-RUN apt-get update \
- && apt-get -y install ipmitool snmp snmpd python3-dev libssl-dev libffi-dev mjpegtools \
- && pip3 install tornado mysqlclient pymysql \
- && rm -rf /tmp/* \
- && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache ipmitool net-snmp-perl \
+ && pip3 install tornado mysqlclient pymysql
