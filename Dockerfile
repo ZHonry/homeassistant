@@ -8,7 +8,7 @@ ARG MAKEFLAGS=-j4
 ARG VERSION=0.96.5
 ARG PLUGINS="frontend|http|nmap|weather|uptimerobot|websocket|pykonkeio"
 
-ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
+ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/dev/requirements_all.txt" /tmp
 
 RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap iputils && \
 addgroup -g ${GUID} hass && \
