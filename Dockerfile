@@ -13,7 +13,6 @@ RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap 
 addgroup -g ${GUID} hass && \
 adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
 pip3 install --upgrade --no-cache-dir pip && \
-cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
 pip3 install --no-cache-dir -r /tmp/requirements_all.txt && \
 pip3 install pykonkeio mysqlclient && \
 pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
