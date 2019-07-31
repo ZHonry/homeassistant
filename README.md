@@ -1,3 +1,1 @@
-在homeassistant官方镜像中增加ipmitool和snmp工具
-
-增加tag
+使用https://github.com/seblucas/alpine-homeassistant中的dockerfile，增加自己需要用的插件
