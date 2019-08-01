@@ -3,7 +3,7 @@ FROM alpine:3.9
 WORKDIR /tmp
 ARG VERSION=0.96.5
 
-ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/dev/requirements_all.txt" /tmp
+ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
 
 RUN adduser -s /bin/false -D -h /app -u 4900 homeassistant \
