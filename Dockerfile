@@ -3,6 +3,9 @@ FROM alpine:3.9
 WORKDIR /tmp
 ARG VERSION=0.96.5
 
+ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/dev/requirements_all.txt" /tmp
+
+
 RUN adduser -s /bin/false -D -h /app -u 4900 homeassistant \
 && apk add --no-cache \
 curl \
@@ -27,10 +30,9 @@ mariadb-dev \
 python3-dev \
 zlib-dev \
 && python3 -m pip install --upgrade --no-cache-dir pip==19.2.1 \
-&& python3 -m pip install pykonkeio \
+&& python3 -m pip install pykonkeio mysqlcilent \
 && python3 -m pip install homeassistant==$VERSION \
-&& curl -L https://github.com/home-assistant/home-assistant/archive/$VERSION.tar.gz | tar zx \
-&& LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/home-assistant-$VERSION/requirements_all.txt" \
+&& LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/requirements_all.txt" \
 && apk del --purge build-dependencies \
 && rm -rf /tmp/*
 
@@ -40,7 +42,6 @@ VOLUME /config
 EXPOSE 8123
 
 WORKDIR /config
-COPY entrypoint.sh /usr/local/bin
 
-ENTRYPOINT ["entrypoint.sh"]
-CMD ["--skip-pip", "--config", "/config"]
+ENTRYPOINT ["hass", "--open-ui", "--config=/config"]
+
