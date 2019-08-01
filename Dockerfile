@@ -37,7 +37,7 @@ pip3 install --upgrade --no-cache-dir pip==19.2.1 && \
 apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata && \
 pip3 install --no-cache-dir pycryptodome==3.6.0 pykonkeio mysqlclient &&\
 cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
-pip3 install --no-cache-dir -r --retries 30 --timeout 60 /tmp/requirements_all.txt && \
+pip3 install --no-cache-dir --retries 30 --timeout 60 -r /tmp/requirements_all.txt && \
 pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
 apk del build-dependencies && \
 rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
