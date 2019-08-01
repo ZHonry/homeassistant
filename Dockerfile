@@ -30,7 +30,7 @@ mariadb-dev \
 python3-dev \
 zlib-dev \
 && python3 -m pip install --upgrade --no-cache-dir pip==19.2.1 \
-&& python3 -m pip install pykonkeio mysqlcilent \
+&& python3 -m pip install pykonkeio mysqlclent \
 && python3 -m pip install homeassistant==$VERSION \
 && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/requirements_all.txt" \
 && apk del --purge build-dependencies \
