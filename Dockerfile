@@ -30,7 +30,7 @@ curl \
 ffmpeg && \
 addgroup -g ${GUID} hass && \
 adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
-pip3 install --upgrade --no-cache-dir pip==19.0.3 && \
+pip3 install --upgrade --no-cache-dir pip==19.2.1 && \
 apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata && \
 cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
 pip3 install --no-cache-dir -r /tmp/requirements_all.txt && \
