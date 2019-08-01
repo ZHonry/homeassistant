@@ -1,5 +1,4 @@
 FROM alpine:3.9
-LABEL maintainer="github.com/robertbeal"
 
 WORKDIR /tmp
 ARG VERSION=0.96.5
@@ -27,7 +26,7 @@ linux-headers \
 mariadb-dev \
 python3-dev \
 zlib-dev \
-pykonkeio \
+&& python3 -m pip install pykonkeio \
 && python3 -m pip install homeassistant==$VERSION \
 && curl -L https://github.com/home-assistant/home-assistant/archive/$VERSION.tar.gz | tar zx \
 && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/home-assistant-$VERSION/requirements_all.txt" \
