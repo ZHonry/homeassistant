@@ -1,16 +1,14 @@
 FROM alpine:3.9
 
-WORKDIR /tmp
+ARG TIMEZONE=Asia/Shanghai
+ARG UID=1000
+ARG GUID=1000
+ARG MAKEFLAGS=-j4
 ARG VERSION=0.96.5
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
-RUN adduser -s /bin/false -D -h /app -u 4900 homeassistant \
-&& apk add --no-cache --virtual=build-dependencies \
-curl \
-findutils \
-glib \
-iputils \
+RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap iputils \
 openssh-client \
 python3 \
 su-exec \
@@ -28,13 +26,17 @@ mariadb-dev \
 python3-dev \
 pkgconfig \
 zlib-dev \
-ffmpeg \
-&& python3 -m pip install --upgrade --no-cache-dir pip==19.2.1 \
-&& python3 -m pip install pykonkeio mysqlclient \
-&& python3 -m pip install homeassistant==$VERSION \
-&& LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/requirements_all.txt" \
-&& apk del --purge build-dependencies \
-&& rm -rf /tmp/*
+curl \
+ffmpeg && \
+addgroup -g ${GUID} hass && \
+adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
+pip3 install --upgrade --no-cache-dir pip==19.0.3 && \
+apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata && \
+cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
+pip3 install --no-cache-dir -r /tmp/requirements_all.txt && \
+pip3 install --no-cache-dir homeassistant=="${VERSION}" && \
+apk del build-dependencies && \
+rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 HEALTHCHECK --interval=30s --retries=3 CMD curl --fail http://localhost:8123/api/ || exit 1
 
@@ -42,6 +44,4 @@ VOLUME /config
 EXPOSE 8123
 
 WORKDIR /config
-
 ENTRYPOINT ["hass", "--open-ui", "--config=/config"]
-
