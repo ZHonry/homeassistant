@@ -27,6 +27,7 @@ linux-headers \
 mariadb-dev \
 python3-dev \
 zlib-dev \
+pykonkeio \
 && python3 -m pip install homeassistant==$VERSION \
 && curl -L https://github.com/home-assistant/home-assistant/archive/$VERSION.tar.gz | tar zx \
 && LIBRARY_PATH=/lib:/usr/lib /bin/sh -c "python3 -m pip install -r /tmp/home-assistant-$VERSION/requirements_all.txt" \
@@ -34,6 +35,7 @@ zlib-dev \
 && rm -rf /tmp/*
 
 HEALTHCHECK --interval=30s --retries=3 CMD curl --fail http://localhost:8123/api/ || exit 1
+
 VOLUME /config
 EXPOSE 8123
 
