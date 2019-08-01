@@ -26,6 +26,7 @@ linux-headers \
 mariadb-dev \
 python3-dev \
 zlib-dev \
+&& python3 -m pip install --upgrade --no-cache-dir pip==19.2.1 \
 && python3 -m pip install pykonkeio \
 && python3 -m pip install homeassistant==$VERSION \
 && curl -L https://github.com/home-assistant/home-assistant/archive/$VERSION.tar.gz | tar zx \
