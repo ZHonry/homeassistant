@@ -5,8 +5,12 @@ ARG VERSION=0.96.5
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
-
-RUN  adduser -s /bin/false -D -h /app -u 4900 homeassistant \
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+&& mkdir ~/.pip \
+&& echo "[global]" > ~/.pip/pip.conf \
+&& echo "timeout = 300" >> ~/.pip/pip.conf \
+&& echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >> ~/.pip/pip.conf \
+&& adduser -s /bin/false -D -h /app -u 4900 homeassistant \
 && apk add --no-cache --virtual=build-dependencies \
 curl \
 findutils \
