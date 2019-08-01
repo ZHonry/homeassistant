@@ -8,7 +8,13 @@ ARG VERSION=0.96.5
 
 ADD "https://raw.githubusercontent.com/home-assistant/home-assistant/${VERSION}/requirements_all.txt" /tmp
 
-RUN apk add --no-cache git python3 ca-certificates libffi-dev libressl-dev nmap iputils \
+RUN apk add --no-cache git \
+python3 \
+ca-certificates \
+libffi-dev \
+libressl-dev \
+nmap \
+iputils \
 openssh-client \
 python3 \
 su-exec \
@@ -21,9 +27,7 @@ libffi-dev \
 libressl-dev \
 libxml2-dev \
 libxslt-dev \
-linux-headers \
 mariadb-dev \
-python3-dev \
 pkgconfig \
 zlib-dev \
 curl \
