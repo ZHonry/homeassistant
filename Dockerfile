@@ -33,7 +33,8 @@ curl \
 ffmpeg && \
 addgroup -g ${GUID} hass && \
 adduser -h /config -D -G hass -s /bin/sh -u ${UID} hass && \
-pip3 install --upgrade --no-cache-dir pip==19.2.1 && \
+pip3 install --upgrade --no-cache-dir pip && \
+pip3 install setuptools --upgrade && \
 apk add --no-cache --virtual=build-dependencies build-base linux-headers python3-dev tzdata && \
 pip3 install --no-cache-dir pycryptodome==3.6.0 pykonkeio mysqlclient &&\
 cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && echo "${TIMEZONE}" > /etc/timezone && \
